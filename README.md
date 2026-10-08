@@ -7,6 +7,10 @@
 > 이 저장소는 **쇼룸**입니다. 어떻게 돌아가는지와 결과물의 모습만 보여 드립니다. 소스 코드·자료·테스트는 비공개 저장소에 있습니다.
 > 아래 샘플은 모두 **가상 예제**(가상 마을·가상 단가)로 만든 결과물이며, 실제 공사명·지번·금액은 들어 있지 않습니다.
 
+![야장 한 장에서 설계도서까지 — 데이터가 흐르는 길](samples/overview/data_map.png)
+
+**사람은 기준을 확정하고, 계산은 코드가 한다.** 결과물의 숫자마다 어떤 규칙·입력에서 왔는지 거슬러 올라갈 수 있습니다.
+
 ## 왜 만들었나
 
 읍면동 토목 담당자는 매년 수십 건의 소규모 공사를 자체 설계합니다. 현장 야장을 보고 도면을 그리고,
@@ -33,23 +37,19 @@ flowchart LR
 
 ## 결과물 샘플 (가상 예제)
 
-**아스콘 덧씌우기 전개도** — 본선·접속·확포장·숭상 기호, NOTE·범례 자동 배치
+| 공종 | 대표 화면 | 도면 · 수량산출서 | 더 보기 |
+|---|---|---|---|
+| **아스콘 덧씌우기**<br/>확포장·숭상·접속 | <a href="samples/demo01_asphalt/drawing_strip.png"><img src="samples/demo01_asphalt/drawing_strip.png" width="280" alt="아스콘 덧씌우기 전개도"/></a> | demo01 [도면](samples/demo01_asphalt/drawing.pdf) · [산출서](samples/demo01_asphalt/sheet.pdf)<br/>demo02 [도면](samples/demo02_asphalt_standard/drawing.pdf) · [산출서](samples/demo02_asphalt_standard/sheet.pdf) | [전개도(폭 급변)](samples/demo02_asphalt_standard/drawing_strip.png) · [총괄표](samples/demo01_asphalt/sheet_summary.png) · [산출근거](samples/demo01_asphalt/sheet_basis.png) |
+| **콘크리트 깨기및복구**<br/>줄눈·컷팅·앙카 | <a href="samples/demo03_concrete/drawing_plan.png"><img src="samples/demo03_concrete/drawing_plan.png" width="280" alt="콘크리트 깨기및복구 평면도"/></a> | [도면](samples/demo03_concrete/drawing.pdf) · [산출서](samples/demo03_concrete/sheet.pdf) | [횡단면도](samples/demo03_concrete/drawing_section.png) · [총괄표](samples/demo03_concrete/sheet_summary.png) · [산출근거](samples/demo03_concrete/sheet_basis.png) |
+| **배수로**<br/>횡단 · 토적 · 수리 | <a href="samples/demo04_drainage/drawing_section.png"><img src="samples/demo04_drainage/drawing_section.png" width="280" alt="배수로 횡단면도"/></a> | [도면](samples/demo04_drainage/drawing.pdf) · [산출서](samples/demo04_drainage/sheet.pdf) | [계획평면도](samples/demo04_drainage/drawing_plan.png) · [토적계산서](samples/demo04_drainage/sheet_earthwork.png) · [수리계산(참고)](samples/demo04_drainage/sheet_hydraulics.png) · [총괄표](samples/demo04_drainage/sheet_summary.png) |
+| **식생블럭 호안**<br/>횡단 · 안정검토<br/><sub>φ30에서 활동 1.31 &lt; 1.5 → 검토 시트가 담당자에게 경고(단면은 자동으로 바꾸지 않음)</sub> | <a href="samples/demo05_revetment/drawing_section.png"><img src="samples/demo05_revetment/drawing_section.png" width="280" alt="식생블럭 호안 횡단면도·상세도"/></a> | [도면](samples/demo05_revetment/drawing.pdf) · [산출서](samples/demo05_revetment/sheet.pdf) | [평면도·정면도](samples/demo05_revetment/drawing_plan.png) · [안정검토(참고)](samples/demo05_revetment/sheet_stability.png) · [총괄표](samples/demo05_revetment/sheet_summary.png) · [산출근거](samples/demo05_revetment/sheet_basis.png) |
 
-![아스콘 덧씌우기 전개도](samples/demo01_asphalt/drawing_strip.png)
-
-**콘크리트 깨기및복구 평면도** — 줄눈(최대 간격)·컷팅·앙카(접속단부)·거푸집
-
-![콘크리트 깨기및복구 평면도](samples/demo03_concrete/drawing_plan.png)
+- 배수로는 측점마다 지반선·터파기선·계획선을 그린 횡단면도(1:50, 한 장 3열×4단)와 같은 자료로 평균단면법 토적계산서를 만듭니다.
+- 안정검토·수리계산은 **검토용 참고 — 결과로 단면·규격을 바꾸지 않습니다**(기준 미달이면 경고와 추천만, 판단은 설계자).
 
 **수량산출근거** — 품목마다 산출식(기호=값+단위)과 수량, 공구 → 공통 → 전체 집계(할증·올림·정수)
 
 ![수량산출근거](samples/demo03_concrete/sheet_basis.png)
-
-| 가상 예제 | 도면 | 수량산출서 | 화면 |
-|---|---|---|---|
-| demo01 아스콘 덧씌우기(확포장·숭상·접속) | [PDF](samples/demo01_asphalt/drawing.pdf) | [PDF](samples/demo01_asphalt/sheet.pdf) | [전개도](samples/demo01_asphalt/drawing_strip.png) · [총괄표](samples/demo01_asphalt/sheet_summary.png) · [산출근거](samples/demo01_asphalt/sheet_basis.png) |
-| demo02 아스콘 덧씌우기(폭 급변·접속 차선) | [PDF](samples/demo02_asphalt_standard/drawing.pdf) | [PDF](samples/demo02_asphalt_standard/sheet.pdf) | [전개도](samples/demo02_asphalt_standard/drawing_strip.png) · [총괄표](samples/demo02_asphalt_standard/sheet_summary.png) · [산출근거](samples/demo02_asphalt_standard/sheet_basis.png) |
-| demo03 콘크리트 깨기및복구 | [PDF](samples/demo03_concrete/drawing.pdf) | [PDF](samples/demo03_concrete/sheet.pdf) | [평면도](samples/demo03_concrete/drawing_plan.png) · [횡단면도](samples/demo03_concrete/drawing_section.png) · [총괄표](samples/demo03_concrete/sheet_summary.png) · [산출근거](samples/demo03_concrete/sheet_basis.png) |
 
 ## 시연 영상
 
@@ -63,17 +63,21 @@ flowchart LR
 | 숭상(맨홀·집수정·지수전·그레이팅 인상) | 깨기·재타설 방식, 내역 품목(맨홀인상 규격)별 개소, 폐콘 참고 집계 | 실제 3건 검증 |
 | 콘크리트 확포장 | 면적·레미콘·거푸집(편측/양측)·앙카(구멍뚫기·철근) | 실제 2건 검증 |
 | 콘크리트 깨기및복구 | 컷팅·깨기·포장·거푸집·줄눈(최대 간격)·앙카(접속단부)·와이어메쉬·폐기물, 평면도·횡단면도 | 실제 1건 검증 |
-| 수량산출서 | 수량총괄표 + 수량산출근거, 내역 품목과 1:1, 산출식·수량·엑셀 수식이 같은 식 데이터, 설계변경 당초/변경 두 줄 | 실제 4건 납품 수량과 대조 |
+| 배수로(수로관·흄관 교체) | 측점별 횡단면도(지반선·터파기선·계획선)·평균단면법 토적, 흄관 매설·집수정 토공, 관 본수·이음 | 실제 1건 수량 계산과 대조 |
+| 식생블럭 호안 | 단면(블럭 단·기초·천단·뒷채움)·토공·호안공·부대공, 블럭 할증, 평면도·정면도·횡단면도·상세도 | 실제 1건 검증 |
+| 중력식 옹벽 | 관행형 단면·토공·거푸집·배면배수, 같은 레이아웃의 도면 | 실제 1건 단면 계산과 대조 |
+| 참고 검토 | 옹벽·식생블럭 간이 안정검토(활동·전도·편심), 배수 수리계산(합리식·Manning, 최소구배 구간) — 검토용 참고 | 참고 계산 재현 |
+| 수량산출서 | 수량총괄표 + 수량산출근거, 내역 품목과 1:1, 산출식·수량·엑셀 수식이 같은 식 데이터, 설계변경 당초/변경 두 줄, 토적계산서·참고 시트 | 실제 5건 납품 수량과 대조 |
 | 단가산출(일위대가) | 품셈 원문 대조값·노임·자재·기계 기초값 → 노무·재료·경비 원 단위, 내역서 금액 | 실제 일위대가 12개 원 단위 일치 |
-| 원가계산 | 제비율·절사, 원가계산서 양식 선택, 폐기물처리비 위치, 공사비역산(이윤율·조달수수료 끝수), 수의계약 계약내역 | 실제 4건 원 단위 일치 |
-| 도면 | 전개도·평면도·횡단면도, NOTE·범례·라벨 자리 자동, 설계변경 표시, 위치도(항공뷰 도로선 따라 노선) | 실제 4건 납품 도면 대조 |
+| 원가계산 | 제비율·절사, 원가계산서 양식 선택, 폐기물처리비 위치, 공사비역산(이윤율·조달수수료 끝수), 수의계약 계약내역 | 실제 5건 원 단위 일치 |
+| 도면 | 전개도·평면도·횡단면도(횡단형 3열×4단)·호안 평면·정면도, NOTE·범례·라벨 자리 자동, 실제 축척 표기, 설계변경 표시, 위치도(항공뷰 도로선 따라 노선) | 실제 4건 납품 도면 대조 |
 | 납품 묶음 | 도면 DXF+PDF, 위치도 그림 이름 검사, 산출서, 내역, 갑지 | 실제 납품 구성 기준 |
 | 배수 구조물 | 수로관·옹벽식측구·식생블럭·옹벽 단위수량과 산출서 양식 | 1단계 완료 |
 
 ## 검증 방식
 
-- **실제 확정 설계와 원 단위 대조**: 비공개 저장소의 테스트 **368개**가 실제 확정 4건의 수량·내역·원가를 내역 프로그램 확정본과 원 단위로, 도면·산출서를 납품본과 글자 단위로 대조합니다.
-- **가상 예제 회귀**: 같은 코드를 가상 예제 3건과 가상 단가로 돌리는 테스트 **287개**. 이 쇼룸의 샘플은 그 가상 예제의 결과물입니다.
+- **실제 확정 설계와 원 단위 대조**: 비공개 저장소의 테스트 **452개**가 실제 확정 5건의 수량·내역·원가를 내역 프로그램 확정본과 원 단위로, 도면·산출서를 납품본과 글자 단위로 대조합니다.
+- **가상 예제 회귀**: 같은 코드를 가상 예제 5건과 가상 단가로 돌리는 테스트 **303개**. 가상 예제의 기대수량은 규칙 식으로 손계산한 값이고, 이 쇼룸의 샘플은 그 가상 예제의 결과물입니다.
 - **근거 우선순위**: 표준품셈 원문(조항·쪽 번호 대조) → 발주기관 설계기준 → 과거 설계(내역 프로그램 관행). 품셈에 없는 관행값은 '근거 미확인'으로 표시해 둡니다.
 - **공개 검사**: 쇼룸에 올리기 전에 금지어(실제 마을명·지번·연락처 등)와 숫자 대조(실제 정답지·실제 단가 숫자), 이용 조건, 결과물 메타데이터를 자동으로 검사합니다.
 
@@ -88,8 +92,8 @@ flowchart LR
 | 1 | 아스콘 덧씌우기 + 숭상 | 실제 3건으로 검증 |
 | 2 | 콘크리트 확포장 | 실제 2건으로 검증 |
 | 3 | 콘크리트 깨기및복구(농로 재포장) | 실제 1건으로 검증 |
-| 4 | 수로관·흄관 매설 | 예정 |
-| 5 | 식생블럭·옹벽 | 예정 |
+| 4 | 수로관·흄관 매설(배수로 횡단형) | 구현 — 실제 1건 수량 대조, 확정 설계 등록 대기 |
+| 5 | 식생블럭 호안·중력식 옹벽 | 식생블럭 실제 1건으로 검증, 옹벽 구현(확정 설계 등록 대기) |
 
 ## 참고
 

@@ -37,14 +37,19 @@ flowchart LR
 
 ## 결과물 샘플 (가상 예제)
 
-| 공종 | 대표 화면 | 도면 · 수량산출서 | 더 보기 |
+<a href="samples/demo04_drainage/drawing_location.png"><img src="samples/demo04_drainage/drawing_location_detail.png" width="49%" alt="가상 위치도 — 노선·시점·종점"/></a> <a href="samples/demo04_drainage/drawing_plan.png"><img src="samples/demo04_drainage/drawing_plan_detail.png" width="49%" alt="배수로 계획평면도 — 주변 현황(논·주택·진입로)"/></a>
+
+<sub>왼쪽: 위치도(가상 마을 그림 — 실제 지도 아님) · 오른쪽: 배수로 계획평면도 1:400 — 설계 시설물은 검정·파랑, 주변 현황(논·밭·주택·진입로·전주)은 회색 배경. 그림을 누르면 도곽 한 장 전체</sub>
+
+| 공종 | 대표 화면 (누르면 도곽 한 장) | 도면 · 수량산출서 | 더 보기 |
 |---|---|---|---|
-| **아스콘 덧씌우기**<br/>확포장·숭상·접속 | <a href="samples/demo01_asphalt/drawing_strip.png"><img src="samples/demo01_asphalt/drawing_strip.png" width="280" alt="아스콘 덧씌우기 전개도"/></a> | demo01 [도면](samples/demo01_asphalt/drawing.pdf) · [산출서](samples/demo01_asphalt/sheet.pdf)<br/>demo02 [도면](samples/demo02_asphalt_standard/drawing.pdf) · [산출서](samples/demo02_asphalt_standard/sheet.pdf) | [전개도(폭 급변)](samples/demo02_asphalt_standard/drawing_strip.png) · [총괄표](samples/demo01_asphalt/sheet_summary.png) · [산출근거](samples/demo01_asphalt/sheet_basis.png) |
-| **콘크리트 깨기및복구**<br/>줄눈·컷팅·앙카 | <a href="samples/demo03_concrete/drawing_plan.png"><img src="samples/demo03_concrete/drawing_plan.png" width="280" alt="콘크리트 깨기및복구 평면도"/></a> | [도면](samples/demo03_concrete/drawing.pdf) · [산출서](samples/demo03_concrete/sheet.pdf) | [횡단면도](samples/demo03_concrete/drawing_section.png) · [총괄표](samples/demo03_concrete/sheet_summary.png) · [산출근거](samples/demo03_concrete/sheet_basis.png) |
-| **배수로**<br/>횡단 · 토적 · 수리 | <a href="samples/demo04_drainage/drawing_section.png"><img src="samples/demo04_drainage/drawing_section.png" width="280" alt="배수로 횡단면도"/></a> | [도면](samples/demo04_drainage/drawing.pdf) · [산출서](samples/demo04_drainage/sheet.pdf) | [계획평면도](samples/demo04_drainage/drawing_plan.png) · [토적계산서](samples/demo04_drainage/sheet_earthwork.png) · [수리계산(참고)](samples/demo04_drainage/sheet_hydraulics.png) · [총괄표](samples/demo04_drainage/sheet_summary.png) |
-| **식생블럭 호안**<br/>횡단 · 안정검토<br/><sub>φ30에서 활동 1.31 &lt; 1.5 → 검토 시트가 담당자에게 경고(단면은 자동으로 바꾸지 않음)</sub> | <a href="samples/demo05_revetment/drawing_section.png"><img src="samples/demo05_revetment/drawing_section.png" width="280" alt="식생블럭 호안 횡단면도·상세도"/></a> | [도면](samples/demo05_revetment/drawing.pdf) · [산출서](samples/demo05_revetment/sheet.pdf) | [평면도·정면도](samples/demo05_revetment/drawing_plan.png) · [안정검토(참고)](samples/demo05_revetment/sheet_stability.png) · [총괄표](samples/demo05_revetment/sheet_summary.png) · [산출근거](samples/demo05_revetment/sheet_basis.png) |
+| **아스콘 덧씌우기**<br/>확포장·숭상·접속 | <a href="samples/demo01_asphalt/drawing_strip.png"><img src="samples/demo01_asphalt/drawing_strip_detail.png" width="320" alt="아스콘 덧씌우기 전개도"/></a> | demo01 [도면](samples/demo01_asphalt/drawing.pdf) · [산출서](samples/demo01_asphalt/sheet.pdf)<br/>demo02 [도면](samples/demo02_asphalt_standard/drawing.pdf) · [산출서](samples/demo02_asphalt_standard/sheet.pdf) | [위치도](samples/demo01_asphalt/drawing_location.png) · [전개도(폭 급변)](samples/demo02_asphalt_standard/drawing_strip.png) · [총괄표](samples/demo01_asphalt/sheet_summary.png) · [산출근거](samples/demo01_asphalt/sheet_basis.png) |
+| **콘크리트 깨기및복구**<br/>줄눈·컷팅·앙카 | <a href="samples/demo03_concrete/drawing_plan.png"><img src="samples/demo03_concrete/drawing_plan_detail.png" width="320" alt="콘크리트 깨기및복구 평면도"/></a> | [도면](samples/demo03_concrete/drawing.pdf) · [산출서](samples/demo03_concrete/sheet.pdf) | [횡단면도](samples/demo03_concrete/drawing_section.png) · [총괄표](samples/demo03_concrete/sheet_summary.png) · [산출근거](samples/demo03_concrete/sheet_basis.png) |
+| **배수로**<br/>횡단 · 토적 · 수리 | <a href="samples/demo04_drainage/drawing_section.png"><img src="samples/demo04_drainage/drawing_section_detail.png" width="320" alt="배수로 횡단면도"/></a> | [도면](samples/demo04_drainage/drawing.pdf) · [산출서](samples/demo04_drainage/sheet.pdf) | [계획평면도](samples/demo04_drainage/drawing_plan.png) · [위치도](samples/demo04_drainage/drawing_location.png) · [토적계산서](samples/demo04_drainage/sheet_earthwork.png) · [수리계산(참고)](samples/demo04_drainage/sheet_hydraulics.png) · [총괄표](samples/demo04_drainage/sheet_summary.png) |
+| **식생블럭 호안**<br/>횡단 · 안정검토<br/><sub>φ30에서 활동 1.31 &lt; 1.5 → 검토 시트가 담당자에게 경고(단면은 자동으로 바꾸지 않음)</sub> | <a href="samples/demo05_revetment/drawing_section.png"><img src="samples/demo05_revetment/drawing_section_detail.png" width="320" alt="식생블럭 호안 횡단면도·상세도"/></a> | [도면](samples/demo05_revetment/drawing.pdf) · [산출서](samples/demo05_revetment/sheet.pdf) | [평면도·정면도](samples/demo05_revetment/drawing_plan.png) · [안정검토(참고)](samples/demo05_revetment/sheet_stability.png) · [총괄표](samples/demo05_revetment/sheet_summary.png) · [산출근거](samples/demo05_revetment/sheet_basis.png) |
 
 - 배수로는 측점마다 지반선·터파기선·계획선을 그린 횡단면도(1:50, 한 장 3열×4단)와 같은 자료로 평균단면법 토적계산서를 만듭니다.
+- 평면도의 주변 현황(논·밭·주택·하천·진입로 등)은 선택 입력이며, 설계 글자와 겹치지 않게 회색 배경으로만 그립니다.
 - 안정검토·수리계산은 **검토용 참고 — 결과로 단면·규격을 바꾸지 않습니다**(기준 미달이면 경고와 추천만, 판단은 설계자).
 
 **수량산출근거** — 품목마다 산출식(기호=값+단위)과 수량, 공구 → 공통 → 전체 집계(할증·올림·정수)
@@ -70,14 +75,14 @@ flowchart LR
 | 수량산출서 | 수량총괄표 + 수량산출근거, 내역 품목과 1:1, 산출식·수량·엑셀 수식이 같은 식 데이터, 설계변경 당초/변경 두 줄, 토적계산서·참고 시트 | 실제 5건 납품 수량과 대조 |
 | 단가산출(일위대가) | 품셈 원문 대조값·노임·자재·기계 기초값 → 노무·재료·경비 원 단위, 내역서 금액 | 실제 일위대가 12개 원 단위 일치 |
 | 원가계산 | 제비율·절사, 원가계산서 양식 선택, 폐기물처리비 위치, 공사비역산(이윤율·조달수수료 끝수), 수의계약 계약내역 | 실제 5건 원 단위 일치 |
-| 도면 | 전개도·평면도·횡단면도(횡단형 3열×4단)·호안 평면·정면도, NOTE·범례·라벨 자리 자동, 실제 축척 표기, 설계변경 표시, 위치도(항공뷰 도로선 따라 노선) | 실제 4건 납품 도면 대조 |
+| 도면 | 전개도·평면도·횡단면도(횡단형 3열×4단)·호안 평면·정면도, NOTE·범례·라벨 자리 자동, 실제 축척 표기, 설계변경 표시, 위치도(항공뷰 도로선 따라 노선), 평면도 주변 현황(회색 배경, 선택) | 실제 4건 납품 도면 대조 |
 | 납품 묶음 | 도면 DXF+PDF, 위치도 그림 이름 검사, 산출서, 내역, 갑지 | 실제 납품 구성 기준 |
 | 배수 구조물 | 수로관·옹벽식측구·식생블럭·옹벽 단위수량과 산출서 양식 | 1단계 완료 |
 
 ## 검증 방식
 
-- **실제 확정 설계와 원 단위 대조**: 비공개 저장소의 테스트 **452개**가 실제 확정 5건의 수량·내역·원가를 내역 프로그램 확정본과 원 단위로, 도면·산출서를 납품본과 글자 단위로 대조합니다.
-- **가상 예제 회귀**: 같은 코드를 가상 예제 5건과 가상 단가로 돌리는 테스트 **303개**. 가상 예제의 기대수량은 규칙 식으로 손계산한 값이고, 이 쇼룸의 샘플은 그 가상 예제의 결과물입니다.
+- **실제 확정 설계와 원 단위 대조**: 비공개 저장소의 테스트 **515개**가 실제 확정 5건의 수량·내역·원가를 내역 프로그램 확정본과 원 단위로, 도면·산출서를 납품본과 글자 단위로 대조합니다.
+- **가상 예제 회귀**: 같은 코드를 가상 예제 5건과 가상 단가로 돌리는 테스트 **305개**. 가상 예제의 기대수량은 규칙 식으로 손계산한 값이고, 이 쇼룸의 샘플은 그 가상 예제의 결과물입니다.
 - **근거 우선순위**: 표준품셈 원문(조항·쪽 번호 대조) → 발주기관 설계기준 → 과거 설계(내역 프로그램 관행). 품셈에 없는 관행값은 '근거 미확인'으로 표시해 둡니다.
 - **공개 검사**: 쇼룸에 올리기 전에 금지어(실제 마을명·지번·연락처 등)와 숫자 대조(실제 정답지·실제 단가 숫자), 이용 조건, 결과물 메타데이터를 자동으로 검사합니다.
 

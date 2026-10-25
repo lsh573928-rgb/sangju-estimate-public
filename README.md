@@ -3,6 +3,7 @@
 **[국토교통]** 읍면동 토목직이 직접 설계하는 소규모 건설공사(총공사비 3천만 원 이하)의
 **야장 → 도면 → 수량산출서 → 설계내역** 과정을 자동화하는 도구입니다.
 현업 지방공무원(토목직)이 AI 코딩 에이전트를 활용해 직접 개발하고 있으며, 실제 설계 건으로 검증하면서 범위를 넓히고 있습니다.
+2026년 10월부터는 담당자가 평소 보던 서류 모양(수량산출서·내역서·도면·야장) 그대로 한 화면에서 확인하고 고치는 쪽으로 맞추고 있습니다.
 
 > 이 저장소는 **쇼룸**입니다. 어떻게 돌아가는지와 결과물의 모습만 보여 드립니다. 소스 코드·자료·테스트는 비공개 저장소에 있습니다.
 > 아래 샘플은 모두 **가상 예제**(가상 마을·가상 단가)로 만든 결과물이며, 실제 공사명·지번·금액은 들어 있지 않습니다.
@@ -30,10 +31,10 @@
 
 ```mermaid
 flowchart LR
-  A["현장 야장<br/>측점·폭·시설물"] --> B["표준 입력<br/>case.yaml"]
+  A["현장 야장 · GPS RTK 좌표<br/>측점·폭·시설물·표고"] --> B["표준 입력<br/>case.yaml"]
   B --> C["수량 모델<br/>산출식 = 수량 = 엑셀 수식"]
   C --> D["수량산출서<br/>총괄표 + 산출근거"]
-  C --> E["도면<br/>전개도·평면도·횡단면도"]
+  C --> E["도면<br/>전개도·평면도·종평면도·횡단면도"]
   C --> F["내역 품목<br/>산출서와 1:1"]
   F --> G["단가산출·원가계산<br/>품셈 원문 → 일위대가 → 원가"]
   D --> H["납품 묶음<br/>도면·산출서·내역·갑지"]
@@ -43,17 +44,34 @@ flowchart LR
 
 입력 한 번으로 도면·수량산출서·산출근거·납품 묶음까지 만듭니다. 계산은 결정론적 코드가 하고, AI는 규칙 정리·검토·문장 작성에만 씁니다.
 
+## 2026년 10월에 더한 것
+
+10월 12일 이후 비공개 저장소에 들어간 기능입니다. 샘플 그림은 아래 결과물에 들어간 것(배수로 종평면도 — 가상 GPS RTK 좌표)만 있고, 나머지는 글로만 적습니다.
+
+- **서류 작업대** (구현) — 수량산출서는 엑셀 모양, 내역서는 내역 프로그램 모양, 도면·야장·건 폴더를 탭으로 넘겨 보며 확인합니다. 새 건 만들기부터 결과 파일까지 같은 화면 안에서 합니다.
+- **말로 고치기** (구현) — "1공구 NO.9 폭 3.8m로 바꿔"처럼 말하면 고칠 목록을 만들고, 담당자가 보고 「적용」해야 다시 계산합니다. 애매한 말은 되묻고, 정답지·단가·계산 결과를 직접 바꾸는 말은 코드가 막습니다. 종단 계획선(관저고·경사·변곡점)도 말로 고칠 수 있고, "~해 줄래?" 같은 부탁도 고치기로 알아봅니다. 다시 그린 도면 쪽에는 '바뀜'을 표시합니다. 인터넷 없이 내 컴퓨터의 AI 모델로 채점합니다 — 126문항에서 GPT-OSS 20B가 72문항을 맞게 처리(고침·되묻기·막기)했고, 잘못 고친 것 1, 짐작해서 고친 것 0이며, 나머지는 되묻거나 막아 사람에게 넘겼습니다(2026-10-25). 잘못 고친 것도 담당자가 「적용」하기 전에는 들어가지 않습니다.
+- **GPS RTK 좌표 → 종평면도** (구현) — RTK 장비가 내보낸 좌표 파일(점번호·X·Y·Z)을 넣으면 위에 평면, 아래에 종단(지반고)을 그린 종평면도가 나옵니다. 종단 계획선을 정하면 측점마다 터파기 깊이가 횡단면도·토적계산서로 이어집니다.
+- **지난 건 양식 가져오기** (구현) — 지난 설계 건의 도면 표제란 문구, 내역 품목 순서, 산출서 머리 문구를 새 건에 그대로 씁니다.
+- **업체 설계도서 교차 검사** (구현) — 업체가 낸 도면·수량산출서·내역서의 수량이 서로 맞는지 근거추적표로 보고, 검토 결과 보고서(한글 hwpx, A4 한 쪽)를 만듭니다.
+- **공사시방서·설계설명서** (구현) — 건설공사 표준시방서(KCS) 대응표로 공사시방서와 설계설명서 초안을 만듭니다.
+- **설계변경 서류** (시제품) — 당초·변경 야장을 비교해 공사비 증감 대비표·물량 대비표(xlsx)와 변경사유서(hwpx)를 만듭니다. 비목 증감 합이 총공사비 차이와 원 단위로 맞지 않으면 멈춥니다.
+- **출장복명서·현장사진 위치도** (시제품) — 건 폴더의 현장사진으로 위치도에 번호 핀과 사진 썸네일을 붙이고, 출장복명서 초안(hwpx)을 만듭니다.
+- **예산서 읽기** (시제품) — 세출예산서(xlsx·csv·웹 저장 엑셀 등)를 읽어 담당 시설사업 목록을 만듭니다.
+- **유역 참고 계산** (시제품) — 수치지형도 등고선으로 유역면적·평균 경사를 구해 배수 수리계산의 참고값으로 씁니다. 담당자 확인 표시가 있어야 계산에 들어갑니다.
+
+<sub>'시제품'은 가상 예제와 시험으로 확인했고, 실제 건에 쓰기 전에 담당자 양식으로 맞추는 중인 것입니다. 지도·좌표·사진은 이 쇼룸에 싣지 않습니다.</sub>
+
 ## 결과물 샘플 (가상 예제)
 
-<a href="samples/demo04_drainage/drawing_location.png"><img src="samples/demo04_drainage/drawing_location_detail.png" width="49%" alt="가상 위치도 — 노선·시점·종점"/></a> <a href="samples/demo04_drainage/drawing_plan.png"><img src="samples/demo04_drainage/drawing_plan_detail.png" width="49%" alt="배수로 계획평면도 — 주변 현황(논·주택·진입로)"/></a>
+<a href="samples/demo04_drainage/drawing_location.png"><img src="samples/demo04_drainage/drawing_location_detail.png" width="49%" alt="가상 위치도 — 노선·시점·종점"/></a> <a href="samples/demo04_drainage/drawing_plan.png"><img src="samples/demo04_drainage/drawing_plan_detail.png" width="49%" alt="배수로 종평면도 — 위 평면(주변 현황), 아래 종단(지반선·계획선)"/></a>
 
-<sub>왼쪽: 위치도(가상 마을 그림 — 실제 지도 아님) · 오른쪽: 배수로 계획평면도 1:400 — 설계 시설물은 검정·파랑, 주변 현황(논·밭·주택·진입로·전주)은 회색 배경. 그림을 누르면 도곽 한 장 전체</sub>
+<sub>왼쪽: 위치도(가상 마을 그림 — 실제 지도 아님) · 오른쪽: 배수로 종평면도 — 위는 평면(1:500, 노선을 측점 거리대로 편 그림), 아래는 가상 GPS RTK 좌표의 높이로 그린 종단(지반선·계획선 i=-2.00%)과 측점별 표. 주변 현황(논·밭·주택·진입로·전주)은 회색 배경. 그림을 누르면 도곽 한 장 전체</sub>
 
 | 공종 | 대표 화면 (누르면 도곽 한 장) | 도면 · 수량산출서 | 더 보기 |
 |---|---|---|---|
 | **아스콘 덧씌우기**<br/>확포장·숭상·접속 | <a href="samples/demo01_asphalt/drawing_strip.png"><img src="samples/demo01_asphalt/drawing_strip_detail.png" width="320" alt="아스콘 덧씌우기 전개도"/></a> | demo01 [도면](samples/demo01_asphalt/drawing.pdf) · [산출서](samples/demo01_asphalt/sheet.pdf)<br/>demo02 [도면](samples/demo02_asphalt_standard/drawing.pdf) · [산출서](samples/demo02_asphalt_standard/sheet.pdf) | [위치도](samples/demo01_asphalt/drawing_location.png) · [전개도(폭 급변)](samples/demo02_asphalt_standard/drawing_strip.png) · [총괄표](samples/demo01_asphalt/sheet_summary.png) · [산출근거](samples/demo01_asphalt/sheet_basis.png) |
 | **콘크리트 깨기및복구**<br/>줄눈·컷팅·앙카 | <a href="samples/demo03_concrete/drawing_plan.png"><img src="samples/demo03_concrete/drawing_plan_detail.png" width="320" alt="콘크리트 깨기및복구 평면도"/></a> | [도면](samples/demo03_concrete/drawing.pdf) · [산출서](samples/demo03_concrete/sheet.pdf) | [횡단면도](samples/demo03_concrete/drawing_section.png) · [총괄표](samples/demo03_concrete/sheet_summary.png) · [산출근거](samples/demo03_concrete/sheet_basis.png) |
-| **배수로**<br/>횡단 · 토적 · 수리 | <a href="samples/demo04_drainage/drawing_section.png"><img src="samples/demo04_drainage/drawing_section_detail.png" width="320" alt="배수로 횡단면도"/></a> | [도면](samples/demo04_drainage/drawing.pdf) · [산출서](samples/demo04_drainage/sheet.pdf) | [계획평면도](samples/demo04_drainage/drawing_plan.png) · [위치도](samples/demo04_drainage/drawing_location.png) · [토적계산서](samples/demo04_drainage/sheet_earthwork.png) · [수리계산(참고)](samples/demo04_drainage/sheet_hydraulics.png) · [총괄표](samples/demo04_drainage/sheet_summary.png) |
+| **배수로**<br/>횡단 · 토적 · 수리 | <a href="samples/demo04_drainage/drawing_section.png"><img src="samples/demo04_drainage/drawing_section_detail.png" width="320" alt="배수로 횡단면도"/></a> | [도면](samples/demo04_drainage/drawing.pdf) · [산출서](samples/demo04_drainage/sheet.pdf) | [종평면도](samples/demo04_drainage/drawing_plan.png) · [위치도](samples/demo04_drainage/drawing_location.png) · [토적계산서](samples/demo04_drainage/sheet_earthwork.png) · [수리계산(참고)](samples/demo04_drainage/sheet_hydraulics.png) · [총괄표](samples/demo04_drainage/sheet_summary.png) |
 | **식생블럭 호안**<br/>횡단 · 안정검토<br/><sub>φ30에서 활동 1.31 &lt; 1.5 → 검토 시트가 담당자에게 경고(단면은 자동으로 바꾸지 않음)</sub> | <a href="samples/demo05_revetment/drawing_section.png"><img src="samples/demo05_revetment/drawing_section_detail.png" width="320" alt="식생블럭 호안 횡단면도·상세도"/></a> | [도면](samples/demo05_revetment/drawing.pdf) · [산출서](samples/demo05_revetment/sheet.pdf) | [평면도·정면도](samples/demo05_revetment/drawing_plan.png) · [안정검토(참고)](samples/demo05_revetment/sheet_stability.png) · [총괄표](samples/demo05_revetment/sheet_summary.png) · [산출근거](samples/demo05_revetment/sheet_basis.png) |
 
 - 배수로는 측점마다 지반선·터파기선·계획선을 그린 횡단면도(1:50, 한 장 3열×4단)와 같은 자료로 평균단면법 토적계산서를 만듭니다.
@@ -105,16 +123,17 @@ flowchart LR
 | 수량산출서 | 수량총괄표 + 수량산출근거, 내역 품목과 1:1, 산출식·수량·엑셀 수식이 같은 식 데이터, 설계변경 당초/변경 두 줄, 토적계산서·참고 시트 | 실제 5건 납품 수량과 대조 |
 | 단가산출(일위대가) | 품셈 원문 대조값·노임·자재·기계 기초값 → 노무·재료·경비 원 단위, 내역서 금액 | 실제 일위대가 12개 원 단위 일치 |
 | 원가계산 | 제비율·절사, 원가계산서 양식 선택, 폐기물처리비 위치, 공사비역산(이윤율·조달수수료 끝수), 수의계약 계약내역 | 실제 5건 원 단위 일치 |
-| 도면 | 전개도·평면도·횡단면도(횡단형 3열×4단)·호안 평면·정면도, NOTE·범례·라벨 자리 자동, 실제 축척 표기, 설계변경 표시, 위치도(항공뷰 도로선 따라 노선), 평면도 주변 현황(회색 배경, 선택) | 실제 4건 납품 도면 대조 |
+| 도면 | 전개도·평면도·종평면도(GPS RTK 좌표 → 평면 + 종단)·횡단면도(횡단형 3열×4단)·호안 평면·정면도, NOTE·범례·라벨 자리 자동, 실제 축척 표기, 설계변경 표시, 위치도(항공뷰 도로선 따라 노선), 평면도 주변 현황(회색 배경, 선택) | 실제 4건 납품 도면 대조 |
 | 용역 내역서 검토 | 원가계산서(제비율·적용 여부·이윤 한도·부가세·폐기물 위치·조달수수료·끝수)·산술(단가×수량·공종 합계·총괄표·참조 단가)·노임·기계경비 대조 → 검토의견표(같음·다름·확인 불가) | 실제 확정 내역 5건(알려진 차이만)·용역 납품 5건 산술 대조 |
 | 납품 묶음 | 도면 DXF+PDF, 위치도 그림 이름 검사, 산출서, 내역, 갑지 | 실제 납품 구성 기준 |
 | 배수 구조물 | 수로관·옹벽식측구·식생블럭·옹벽 단위수량과 산출서 양식 | 1단계 완료 |
 
 ## 검증 방식
 
-- **실제 확정 설계와 원 단위 대조**: 비공개 저장소의 테스트 **820개**가 실제 확정 5건의 수량·내역·원가를 내역 프로그램 확정본과 원 단위로, 도면·산출서를 납품본과 글자 단위로 대조합니다.
-- **가상 예제 회귀**: 같은 코드를 가상 예제 5건과 가상 단가로 돌리는 테스트 **320개**. 가상 예제의 기대수량은 규칙 식으로 손계산한 값이고, 이 쇼룸의 샘플은 그 가상 예제의 결과물입니다.
+- **실제 확정 설계와 원 단위 대조**: 실제 확정 5건의 수량·내역·원가를 내역 프로그램 확정본과 원 단위로, 도면·산출서를 납품본과 글자 단위로 대조합니다. 비공개 저장소의 자동 검사는 모두 **1,322개**입니다(2026-10-25 기준, 기능 시험 포함).
+- **가상 예제 회귀**: 같은 코드를 가상 예제 5건과 가상 단가로 돌리는 테스트 **364개**. 가상 예제의 기대수량은 규칙 식으로 손계산한 값이고, 이 쇼룸의 샘플은 그 가상 예제의 결과물입니다.
 - **근거 우선순위**: 표준품셈 원문(조항·쪽 번호 대조) → 발주기관 설계기준 → 과거 설계(내역 프로그램 관행). 품셈에 없는 관행값은 '근거 미확인'으로 표시해 둡니다.
+- **처리 시간**: 야장 입력부터 설계도서 묶음(도면·산출서·내역서·시방서·zip)까지 엔진 시간은 한 건 6~8초입니다(실제 확정 5건, 2026-10-25 실측). 사람이 확인하는 시간은 들어 있지 않습니다.
 - **공개 검사**: 쇼룸에 올리기 전에 금지어(실제 마을명·지번·연락처 등)와 숫자 대조(실제 정답지·실제 단가 숫자), 이용 조건, 결과물 메타데이터를 자동으로 검사합니다.
 
 ## 규칙
